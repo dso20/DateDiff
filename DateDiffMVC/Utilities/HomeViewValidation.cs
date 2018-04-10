@@ -15,16 +15,16 @@ namespace DateDiffMVC.Utilities
 
 
 
-            bool valid = context.StartDate.Year < context.EndDate.Year;
+            bool valid = context.StartYear < context.EndYear;
 
             if (!valid)
             {
-                valid = context.StartDate.Month < context.EndDate.Month;
+                valid = context.StartMonth < context.EndMonth;
             }
 
             if (!valid)
             {
-                valid = context.StartDate.Day < context.EndDate.Day;
+                valid = context.StartDay < context.EndDay;
             }
 
             return valid ? ValidationResult.Success : new ValidationResult("Start date is in the past");

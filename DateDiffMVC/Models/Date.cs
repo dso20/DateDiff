@@ -2,18 +2,31 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 
 namespace DateDiffMVC.Models
 {
-    public class Date
+    public class Date : IDate
     {
+        //*** Don't want to expose these props as in this prog the dates 
+        //have one function and so should never be updated by client func
         [Range(1, int.MaxValue, ErrorMessage = "Select a year")]
-        public int Year { get; set; }
+        public int Year { get; private set; }
         [Range(1, 12, ErrorMessage = "Select a month")]
-        public int Month { get; set; }
+        public int Month { get; private set; }
         [Range(1, 31, ErrorMessage = "Select a day")]
-        public int Day { get; set; }
+        public int Day { get; private set; }
+
+
+        //*** set our props in ctor as they shouldn't be changing
+        // if they were to change we would want a user to create a new date
+        public Date(int year, int month, int day)
+        {
+            Year = year;
+            Month = month;
+            Day = day;
+        }
 
         private readonly static Dictionary<int, int> _months = new Dictionary<int, int>()
         {
@@ -33,17 +46,10 @@ namespace DateDiffMVC.Models
         };
 
 
-        /// <summary>
-        /// Return number of days in date from the start of gregorian calendar, factoring in leap years and month lengths
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns>int</returns>
         public static int ToDays(Date date)
         {
             var days = date.Day;
-
             var months = MonthDays(date.Month, date.Year);
-
             var years = YearDays(date.Year);
 
             return days += months += years;
@@ -82,21 +88,11 @@ namespace DateDiffMVC.Models
             }
 
             return days;
-
         }
 
-        /// <summary>
-        /// Convert number of days between two dates to Years,Months,Days
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="diff"></param>
-        /// <returns>string</returns>
+
         public static Tuple<int, int, int> Diff(double diff, Date start)
         {
-            //we now need to convert the gap into days/months/years
-            //we currently have an exact figure, days, the more abstract months/years to work against
-            //going to do this by gradually decrement the days value and make some assumptions
-
 
             //so we could assume the number of days in a year and start subtracting 365.24
             var years = (int)Math.Floor(diff / 365.24);
@@ -127,11 +123,6 @@ namespace DateDiffMVC.Models
             return Tuple.Create(days, months, years);
         }
 
-        /// <summary>
-        /// Returns a value to indicate if the given year is a leap
-        /// </summary>
-        /// <param name="year"></param>
-        /// <returns></returns>
         private static int LeapYear(int year)
         {
 

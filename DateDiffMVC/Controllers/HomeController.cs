@@ -13,7 +13,8 @@ namespace DateDiffMVC.Controllers
 {
     public class HomeController : Controller
     {
-
+        //q do we want to break the dependency to date? if so customerFactoryController?
+        //q do we want to break the dependency to viewModels?
         [Route("Home/Index/")]
         public ActionResult Index()
         {
@@ -28,15 +29,14 @@ namespace DateDiffMVC.Controllers
                 return View(new HomeViewModel());
             }
             
-            //let's break our dates down to a workable unit (days)
-            var days1 = Date.ToDays(new Date {Day = model.StartDate.Day, Month = model.StartDate.Month, Year = model.StartDate.Year});
-            var days2 = Date.ToDays(new Date { Day = model.EndDate.Day, Month = model.EndDate.Month, Year = model.EndDate.Year });
+            var days1 = Date.ToDays(new Date(model.StartDay, model.StartMonth, model.StartYear));
+            var days2 = Date.ToDays(new Date(model.EndDay, model.EndMonth, model.EndYear));
 
             //find the difference
             var timespan = (new TimeSpan(days2, 0, 0, 0) - (new TimeSpan(days1, 0, 0, 0)));
 
             //turn that difference to days months years
-            var result =  Date.Diff(timespan.Days,model.StartDate);
+            var result =  Date.Diff(timespan.Days, new Date(model.StartYear,model.StartMonth,model.StartDay));
             
             var strReturn = string.Format("There are {0} Years {1} Months and {2} Days between these dates.", result.Item3, result.Item2, result.Item1);
             ModelState.Remove("Result");
