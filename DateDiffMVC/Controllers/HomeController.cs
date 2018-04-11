@@ -16,11 +16,10 @@ namespace DateDiffMVC.Controllers
     {
         private readonly ICalendarService _calendarService;
 
-        //q do we want to break the dependency to date? if so customerFactoryController for new up?
-        //q do we want to break the dependency to viewModels?
         public HomeController(ICalendarService calendarService)
         {
             _calendarService = calendarService;
+            // _calendarService = DependencyResolver.Current.GetService<ICalendarService>();
         }
 
         [Route("Home/Index/")]
@@ -32,20 +31,22 @@ namespace DateDiffMVC.Controllers
         [HttpPost]
         public ActionResult Index(HomeViewModel model)
         {
+
             if (!ModelState.IsValid)
             {
                 return View(new HomeViewModel());
             }
-            //_calendarService.GetDateTotalDays()
 
-            var days1 = Date.ToDays(new Date(model.StartDay, model.StartMonth, model.StartYear));
-            var days2 = Date.ToDays(new Date(model.EndDay, model.EndMonth, model.EndYear));
+            
+       
+            var days1 = _calendarService.ToDays(model.StartDate);
+            var days2 = _calendarService.ToDays(model.EndDate);
 
             //find the difference
             var timespan = (new TimeSpan(days2, 0, 0, 0) - (new TimeSpan(days1, 0, 0, 0)));
 
             //turn that difference to days months years
-            var result =  Date.Diff(timespan.Days, new Date(model.StartYear,model.StartMonth,model.StartDay));
+            var result =  _calendarService.Diff(timespan.Days, model.StartDate);
             
             var strReturn = string.Format("There are {0} Years {1} Months and {2} Days between these dates.", result.Item3, result.Item2, result.Item1);
             ModelState.Remove("Result");

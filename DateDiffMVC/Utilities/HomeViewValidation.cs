@@ -13,16 +13,16 @@ namespace DateDiffMVC.Utilities
         {
             var context = (HomeViewModel)validationContext.ObjectInstance; //cast object from form to model type
 
-            bool valid = context.StartYear < context.EndYear;
+            bool valid = context.StartDate.Year < context.EndDate.Year;
 
             if (!valid)
             {
-                valid = context.StartMonth < context.EndMonth;
+                valid = context.StartDate.Month < context.EndDate.Month;
             }
 
             if (!valid)
             {
-                valid = context.StartDay < context.EndDay;
+                valid = context.StartDate.Day < context.EndDate.Day;
             }
 
             return valid ? ValidationResult.Success : new ValidationResult("Start date is in the past");

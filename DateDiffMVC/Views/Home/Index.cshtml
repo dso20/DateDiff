@@ -37,28 +37,25 @@
     @using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {
         <div style="float: left; height: 0px; margin-right: 5px">
-            @Html.LabelFor(m => m.StartDay, new {@class = "LeftLabelColumn"})
-            @Html.DropDownListFor(m => m.StartDay, Enumerable.Range(1, 31).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}), "Day", new {@class = "LeftValueColumn"})
-            @Html.LabelFor(m => m.StartMonth, new {@class = "LeftLabelColumn"})
-            @Html.DropDownListFor(m => m.StartMonth, Enumerable.Range(1, 12).Select(i => new SelectListItem {Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i)}), "Month", new {@class = "LeftValueColumn"})
-            @Html.LabelFor(m => m.StartYear, new {@class = "LeftLabelColumn"})
-
-            @*@Html.DropDownListFor(m => m.StartYear, Enumerable.Range(1582, 650).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}).OrderByDescending(i => i.Value), "Year", new {@class = "LeftValueColumn"})*@
+            @Html.LabelFor(m => m.StartDate.Day, new {@class = "LeftLabelColumn"})
+            @Html.DropDownListFor(m => m.StartDate.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}), "Day", new {@class = "LeftValueColumn"})
+            @Html.LabelFor(m => m.StartDate.Month, new {@class = "LeftLabelColumn"})
+            @Html.DropDownListFor(m => m.StartDate.Month, Enumerable.Range(1, 12).Select(i => new SelectListItem {Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i)}), "Month", new {@class = "LeftValueColumn"})
+            @Html.LabelFor(m => m.StartDate.Year, new {@class = "LeftLabelColumn"})
+            @Html.DropDownListFor(m => m.StartDate.Year, Enumerable.Range(1582, 650).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}).OrderByDescending(i => i.Value), "Year", new {@class = "LeftValueColumn"})
         </div>
         <div style="float: right; margin-left: 15px">
-            @Html.LabelFor(m => m.EndDay, new {@class = "LeftLabelColumn"})
-            @Html.DropDownListFor(m => m.EndDay, Enumerable.Range(1, 31).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}), "Day", new {@class = "LeftValueColumn"})
-            @Html.LabelFor(m => m.EndMonth, new {@class = "LeftLabelColumn"})
-            @Html.DropDownListFor(m => m.EndMonth, Enumerable.Range(1, 12).Select(i => new SelectListItem {Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i)}), "Month", new {@class = "LeftValueColumn"})
-            @Html.LabelFor(m => m.EndYear, new {@class = "LeftLabelColumn"})
-            @Html.DropDownListFor(m => m.EndYear, Enumerable.Range(1582, 650).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}).OrderByDescending(i => i.Value), "Year", new {@class = "LeftValueColumn"})
+            @Html.LabelFor(m => m.EndDate.Day, new {@class = "LeftLabelColumn"})
+            @Html.DropDownListFor(m => m.EndDate.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}), "Day", new {@class = "LeftValueColumn"})
+            @Html.LabelFor(m => m.EndDate.Month, new {@class = "LeftLabelColumn"})
+            @Html.DropDownListFor(m => m.EndDate.Month, Enumerable.Range(1, 12).Select(i => new SelectListItem {Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i)}), "Month", new {@class = "LeftValueColumn"})
+            @Html.LabelFor(m => m.EndDate.Year, new {@class = "LeftLabelColumn"})
+            @Html.DropDownListFor(m => m.EndDate.Year, Enumerable.Range(1582, 650).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}).OrderByDescending(i => i.Value), "Year", new {@class = "LeftValueColumn"})
             
 
 
             <input type="submit" value="Convert" style="margin-top: 5px"/>
         </div>
-
-
 
         <div style="clear: both;">
             @if (!string.IsNullOrEmpty(Model.Result))
