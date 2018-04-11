@@ -7,20 +7,23 @@ using System.Web;
 
 namespace DateDiffMVC.Models
 {
+    //q should I not be using static methods so much as harder to test?
     public class Date : IDate
     {
         //*** Don't want to expose these props as in this prog the dates 
-        //have one function and so should never be updated by client func
-        [Range(1, int.MaxValue, ErrorMessage = "Select a year")]
+        //***have one function and so should never be updated by client func
+        //q can I have the validation here, but the message at the veiw model level? allowing different messages for diff views
+        //[Range(1, int.MaxValue, ErrorMessage = "Select a year")]
         public int Year { get; private set; }
         [Range(1, 12, ErrorMessage = "Select a month")]
+        [Required]
         public int Month { get; private set; }
         [Range(1, 31, ErrorMessage = "Select a day")]
         public int Day { get; private set; }
 
 
         //*** set our props in ctor as they shouldn't be changing
-        // if they were to change we would want a user to create a new date
+        // ***if they were to change we would want a user to create a new date
         public Date(int year, int month, int day)
         {
             Year = year;
@@ -56,10 +59,11 @@ namespace DateDiffMVC.Models
 
         }
 
+        //***don't repeat yourself, there's some duplicated code here...
         private static int MonthDays(int month, int year)
         {
             //want only full months, if jan then no full month to count
-            month = month - 1;
+            month -= 1;
 
             var day = 0;
 
@@ -70,7 +74,6 @@ namespace DateDiffMVC.Models
 
             //factor in leap year
             day += month >= 2 ? LeapYear(year):0;
-
 
             return day;
         }
@@ -109,11 +112,8 @@ namespace DateDiffMVC.Models
             {
                 diff -= (start.Month != 2 ? _months[start.Month] : _months[start.Month] + LeapYear(start.Year));
                 months++;
-               start.Month++;
-                if (start.Month == 13)
-                {
-                    start.Month = 1;
-                }
+                start.Month++;
+                start.Month = start.Month == 13 ? 1 : start.Month;
             }
 
             days = (int)Math.Ceiling(diff);

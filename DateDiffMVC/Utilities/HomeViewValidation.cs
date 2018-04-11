@@ -13,8 +13,6 @@ namespace DateDiffMVC.Utilities
         {
             var context = (HomeViewModel)validationContext.ObjectInstance; //cast object from form to model type
 
-
-
             bool valid = context.StartYear < context.EndYear;
 
             if (!valid)

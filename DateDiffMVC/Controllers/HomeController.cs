@@ -6,6 +6,7 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Web;
 using System.Web.Mvc;
 using DateDiffMVC.Models;
+using DateDiffMVC.Services;
 using DateDiffMVC.ViewModels;
 
 //taking 1582 as our start point as modern calendars seem to backdate leap years
@@ -13,8 +14,15 @@ namespace DateDiffMVC.Controllers
 {
     public class HomeController : Controller
     {
-        //q do we want to break the dependency to date? if so customerFactoryController?
+        private readonly ICalendarService _calendarService;
+
+        //q do we want to break the dependency to date? if so customerFactoryController for new up?
         //q do we want to break the dependency to viewModels?
+        public HomeController(ICalendarService calendarService)
+        {
+            _calendarService = calendarService;
+        }
+
         [Route("Home/Index/")]
         public ActionResult Index()
         {
@@ -28,7 +36,8 @@ namespace DateDiffMVC.Controllers
             {
                 return View(new HomeViewModel());
             }
-            
+            //_calendarService.GetDateTotalDays()
+
             var days1 = Date.ToDays(new Date(model.StartDay, model.StartMonth, model.StartYear));
             var days2 = Date.ToDays(new Date(model.EndDay, model.EndMonth, model.EndYear));
 
@@ -48,7 +57,5 @@ namespace DateDiffMVC.Controllers
 
     
     }
-
-
 
 }
