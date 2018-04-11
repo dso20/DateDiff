@@ -21,21 +21,7 @@ namespace DateDiffMVC.Models
         [Range(1, 31, ErrorMessage = "Select a day")]
         public int Day { get;  set; }
 
-        public Date()
-        {
-
-        }
-
-       ////Q arguablly you could we have exposed these props so why use ctor to set?
-       // //need to expose to allow view to set them, if we didn't want to expose them what would we put in ViewModel? when how bind in that case?
-       // public Date(int day, int month, int year)
-       // {
-       //     Year = year;
-       //     Month = month;
-       //     Day = day;
-       // }
-
-
+  
     }
 
 }

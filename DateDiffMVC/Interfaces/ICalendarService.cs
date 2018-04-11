@@ -5,8 +5,7 @@ namespace DateDiffMVC.Services
 {
     public interface ICalendarService
     {
-        string Result(IDate start, IDate end);
-        //int ToDays(IDate date);
-        //Tuple<int, int, int> Diff(double days, Date dateStart);
+        Tuple<int, int, int> Result(IDate start, IDate end);
+
     }
 }

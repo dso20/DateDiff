@@ -19,7 +19,6 @@ namespace DateDiffMVC.Controllers
         public HomeController(ICalendarService calendarService)
         {
             _calendarService = calendarService;
-            // _calendarService = DependencyResolver.Current.GetService<ICalendarService>();
         }
 
         [Route("Home/Index/")]
@@ -33,23 +32,14 @@ namespace DateDiffMVC.Controllers
         {
 
             if (!ModelState.IsValid)
-            {
                 return View(new HomeViewModel());
-            }
 
+
+            var result = _calendarService.Result(model.StartDate, model.EndDate);
             
-       
-            var days1 = _calendarService.ToDays(model.StartDate);
-            var days2 = _calendarService.ToDays(model.EndDate);
-
-            //find the difference
-            var timespan = (new TimeSpan(days2, 0, 0, 0) - (new TimeSpan(days1, 0, 0, 0)));
-
-            //turn that difference to days months years
-            var result =  _calendarService.Diff(timespan.Days, model.StartDate);
-            
+            //is it calendarservice job to get the vals, yes. is it's job to sort the wording?
             var strReturn = string.Format("There are {0} Years {1} Months and {2} Days between these dates.", result.Item3, result.Item2, result.Item1);
-            ModelState.Remove("Result");
+       //     ModelState.Remove("Result");
             var viewModel = new HomeViewModel() {Result = strReturn };
 
             return View(viewModel);

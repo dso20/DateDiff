@@ -6,17 +6,29 @@ using DateDiffMVC.Models;
 
 namespace DateDiffMVC.Services
 {
-    //the only point of this service at the moment is to get the display values for the viewmodel, so that's the only func we should expose
+    //The client should define the interface, therefore,
+    //expose function that returns the result
+    //also it takes 2 dates, which are the original parameters of the controllers viewmodel
     //following that the variables that that func needs should be worked out in here too
+
+    //so this class looks a little large
+    //also what functions should we choose to expose?
     public class CalendarService : ICalendarService
     {
 
-        public string Result(IDate start, IDate end)
+        public Tuple<int,int,int> Result(IDate start, IDate end)
         {
-            return "";
+            var startDays = ToDays(start);
+            var endDays = ToDays(end);
+
+            //find the difference
+            var timespan = (new TimeSpan(endDays, 0, 0, 0) - (new TimeSpan(startDays, 0, 0, 0)));
+
+            return Diff(timespan.Days, start);
         }
 
-
+        //single responsibility. Even if this was an exposed function it could stay here because
+        //eg the above could not "change" independetly of this
         private static int ToDays(IDate date)
         {
             var days = date.Day;
@@ -59,7 +71,7 @@ namespace DateDiffMVC.Services
         }
 
 
-        private static Tuple<int, int, int> Diff(double diff, Date dateStart)
+        private static Tuple<int, int, int> Diff(double diff, IDate dateStart)
         {
 
             //so we could assume the number of days in a year and dateStart subtracting 365.24
@@ -89,21 +101,24 @@ namespace DateDiffMVC.Services
         }
 
 
+
+
         private static int LeapYear(int year)
         {
+            return year%4 == 0 ? 0 : year%100 == 0 ? 1 : 0;
 
-            if (year % 4 == 0)
-            {
-                if (year % 100 == 0)
-                {
-                    if (year % 400 == 0)
-                    {
-                        return 1;
-                    }
-                }
-                return 1;
-            }
-            return 0;
+            //if (year % 4 == 0)
+            //{
+            //    if (year % 100 == 0)
+            //    {
+            //        if (year % 400 == 0)
+            //        {
+            //            return 1;
+            //        }
+            //    }
+            //    return 1;
+            //}
+            //return 0;
         }
 
         private readonly static Dictionary<int, int> Months = new Dictionary<int, int>()

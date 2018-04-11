@@ -26,7 +26,7 @@ namespace DateDiffMVC
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             //services
-            builder.RegisterType<CalendarService>().As<ICalendarService>();
+            builder.RegisterType<CalendarService>().As<ICalendarService>().InstancePerRequest();
 
 
             var container = builder.Build();
