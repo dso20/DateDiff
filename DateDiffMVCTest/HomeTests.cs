@@ -24,16 +24,16 @@ namespace DateDiffMVCTest
 
        };
 
-        [TestCaseSource("test")]
-        [Test]
-        public void IndexPost_result(int diff,IDate start, Tuple<int,int,int> expected)
-        {
-            //need to change
-            var result = Date.Diff(diff, start);
+        //[TestCaseSource("test")]
+        //[Test]
+        //public void IndexPost_result(int diff,IDate start, Tuple<int,int,int> expected)
+        //{
+        //    //need to change
+        //    var result = Date.Diff(diff, start);
             
-            Assert.AreEqual(expected ,result);
+        //    Assert.AreEqual(expected ,result);
 
-        }
+        //}
      
     }
 }
