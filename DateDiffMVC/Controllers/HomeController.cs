@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
@@ -9,16 +8,17 @@ using DateDiffMVC.Models;
 using DateDiffMVC.Services;
 using DateDiffMVC.ViewModels;
 
-//taking 1582 as our start point as modern calendars seem to backdate leap years
 namespace DateDiffMVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ICalendarService _calendarService;
+        private readonly ILoggerService _logger;
 
-        public HomeController(ICalendarService calendarService)
+        public HomeController(ICalendarService calendarService,ILoggerService logger)
         {
             _calendarService = calendarService;
+            _logger = logger;
         }
 
         [Route("Home/Index/")]
@@ -27,6 +27,7 @@ namespace DateDiffMVC.Controllers
             return View(new HomeViewModel());
         }
 
+        //to test how to mock the view model? do we even?
         [HttpPost]
         public ActionResult Index(HomeViewModel model)
         {
@@ -36,12 +37,20 @@ namespace DateDiffMVC.Controllers
 
 
             var result = _calendarService.Result(model.StartDate, model.EndDate);
+            _logger.Log($"The difference between these dates is {result.Item3} years {result.Item2} Months and {result.Item1} days.", this.GetType());
+            //the above should be done in another class really?
+
             var viewModel = new HomeViewModel() {Result = result };
 
             return View(viewModel);
 
         }
-    
-    }
 
+      //  [AcceptVerbs("Get", "Post")]
+        public JsonResult VerifyDay(int Day)
+        {
+
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+    }
 }

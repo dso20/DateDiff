@@ -30,6 +30,7 @@ namespace DateDiffMVC
 
             //services
             builder.RegisterType<CalendarService>().As<ICalendarService>().InstancePerRequest();
+            builder.RegisterType<LoggerService>().As<ILoggerService>();
 
 
             var container = builder.Build();

@@ -16,7 +16,7 @@ namespace DateDiffMVC.Services
     //also what functions should we choose to expose?
 
     //extension? should the main method be virtual? should the interface inherit from a base interface so we could allow for different parameters to be passed?
-    public class CalendarService : ICalendarService, IValidatableObject
+    public class CalendarService : ICalendarService
     {
 
         public Tuple<int,int,int> Result(IDate start, IDate end)
@@ -32,6 +32,7 @@ namespace DateDiffMVC.Services
 
         //single responsibility. Even if this was an exposed function it could stay here because
         //eg the above could not "change" independetly of this
+        //what if we decide we need this func? static utility class?
         private static int ToDays(IDate date)
         {
             var days = date.Day;
@@ -105,23 +106,11 @@ namespace DateDiffMVC.Services
 
 
 
-
+        //below could be considered props of dates no?
+        //but they are required here so...
         private static int LeapYear(int year)
         {
             return year%4 == 0 ? 0 : year%100 == 0 ? 1 : 0;
-
-            //if (year % 4 == 0)
-            //{
-            //    if (year % 100 == 0)
-            //    {
-            //        if (year % 400 == 0)
-            //        {
-            //            return 1;
-            //        }
-            //    }
-            //    return 1;
-            //}
-            //return 0;
         }
 
         private readonly static Dictionary<int, int> Months = new Dictionary<int, int>()
@@ -141,10 +130,5 @@ namespace DateDiffMVC.Services
 
         };
 
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
