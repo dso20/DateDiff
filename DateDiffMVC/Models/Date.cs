@@ -21,7 +21,11 @@ namespace DateDiffMVC.Models
         [Range(1, 31, ErrorMessage = "Select a day")]
         public int Day { get;  set; }
 
-  
+
+        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 
 }

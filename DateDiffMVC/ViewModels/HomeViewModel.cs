@@ -10,9 +10,10 @@ using DateDiffMVC.Utilities;
 
 namespace DateDiffMVC.ViewModels
 {
-    
-    [HomeViewValidation]
-    public class HomeViewModel 
+
+    [HomeViewValidation] 
+//REPLACE WITH OBJECT VALIDATION?
+    public class HomeViewModel  
     {
 
         public Date StartDate { get; set; }
@@ -21,5 +22,9 @@ namespace DateDiffMVC.ViewModels
         public Tuple<int,int,int> Result { get; set; }
 
 
+        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        //{
+            
+        //}
     }
 }

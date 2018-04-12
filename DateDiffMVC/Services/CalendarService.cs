@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using DateDiffMVC.Models;
@@ -15,7 +16,7 @@ namespace DateDiffMVC.Services
     //also what functions should we choose to expose?
 
     //extension? should the main method be virtual? should the interface inherit from a base interface so we could allow for different parameters to be passed?
-    public class CalendarService : ICalendarService
+    public class CalendarService : ICalendarService, IValidatableObject
     {
 
         public Tuple<int,int,int> Result(IDate start, IDate end)
@@ -141,5 +142,9 @@ namespace DateDiffMVC.Services
         };
 
 
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
