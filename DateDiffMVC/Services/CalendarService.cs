@@ -13,6 +13,8 @@ namespace DateDiffMVC.Services
 
     //so this class looks a little large
     //also what functions should we choose to expose?
+
+    //extension? should the main method be virtual? should the interface inherit from a base interface so we could allow for different parameters to be passed?
     public class CalendarService : ICalendarService
     {
 

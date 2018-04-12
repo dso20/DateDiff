@@ -1,4 +1,5 @@
-﻿@model DateDiffMVC.ViewModels.HomeViewModel
+﻿@using System.Web.Optimization
+@model DateDiffMVC.ViewModels.HomeViewModel
 @{
     Layout = null;
 }
@@ -8,6 +9,10 @@
 
 
 <html>
+<head>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
 <style type="text/css">
     .Main {
         background-color: white;
@@ -39,6 +44,8 @@
         <div style="float: left; height: 0px; margin-right: 5px">
             @Html.LabelFor(m => m.StartDate.Day, new {@class = "LeftLabelColumn"})
             @Html.DropDownListFor(m => m.StartDate.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}), "Day", new {@class = "LeftValueColumn"})
+                @Html.DropDownListFor(m => m.StartDate.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}), "Day", new { htmlAttributes = new { @class = "form-control" } })
+
             @Html.LabelFor(m => m.StartDate.Month, new {@class = "LeftLabelColumn"})
             @Html.DropDownListFor(m => m.StartDate.Month, Enumerable.Range(1, 12).Select(i => new SelectListItem {Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i)}), "Month", new {@class = "LeftValueColumn"})
             @Html.LabelFor(m => m.StartDate.Year, new {@class = "LeftLabelColumn"})
@@ -51,29 +58,104 @@
             @Html.DropDownListFor(m => m.EndDate.Month, Enumerable.Range(1, 12).Select(i => new SelectListItem {Value = i.ToString(), Text = System.Globalization.CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(i)}), "Month", new {@class = "LeftValueColumn"})
             @Html.LabelFor(m => m.EndDate.Year, new {@class = "LeftLabelColumn"})
             @Html.DropDownListFor(m => m.EndDate.Year, Enumerable.Range(1582, 650).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}).OrderByDescending(i => i.Value), "Year", new {@class = "LeftValueColumn"})
-            
 
 
             <input type="submit" value="Convert" style="margin-top: 5px"/>
         </div>
 
         <div style="clear: both;">
-            @if (!string.IsNullOrEmpty(Model.Result))
+            @if (Model.Result != null)
             {
                 @Html.LabelFor(m => m.Result, new {@class = "LeftLabelColumn"})
-                @Html.TextBoxFor(m => m.Result, new { @style ="width:400px;" })
+                <h4>
+                    @($"There are {@Model.Result.Item3} Years {@Model.Result.Item2} Months and {@Model.Result.Item1} Days between these dates.");
+                </h4>
             }
             else
             {
-                @Html.Label("Enter values to compare")
+                <h3>
+                    Enter values to compare
+                </h3>
             }
         </div>
         @Html.ValidationSummary()
 
     }
+    
+    
+    
+
+    @*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <hr />
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Vendor Name
+            </div>
+            <div class="col-md-4">
+
+                @Html.DropDownListFor(m => m.StartDate.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem {Value = i.ToString(), Text = i.ToString()}), "Day", new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Vendor Website
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Vendor Address
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Vendor Username
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control " } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                User Managing the Vendor
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.ManagingUser, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Vendor Password
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Reason We Use the Vendor
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Usage, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <input type="submit" value="Create" class="btn btn-xs btn-primary" /> or
+            <a href="@Url.Action("Index")" class="btn btn-xs btn-default">Cancel</a>
+        </div>
+    }*@
 
 </div>
-    
+
 
 </body>
 

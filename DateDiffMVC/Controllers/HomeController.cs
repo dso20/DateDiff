@@ -36,16 +36,11 @@ namespace DateDiffMVC.Controllers
 
 
             var result = _calendarService.Result(model.StartDate, model.EndDate);
-            
-            //is it calendarservice job to get the vals, yes. is it's job to sort the wording?
-            var strReturn = string.Format("There are {0} Years {1} Months and {2} Days between these dates.", result.Item3, result.Item2, result.Item1);
-       //     ModelState.Remove("Result");
-            var viewModel = new HomeViewModel() {Result = strReturn };
+            var viewModel = new HomeViewModel() {Result = result };
 
             return View(viewModel);
 
         }
-
     
     }
 
