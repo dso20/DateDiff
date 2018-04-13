@@ -30,8 +30,7 @@ namespace DateDiffMVC.Services
             return Diff(timespan.Days, start);
         }
 
-        //single responsibility. Even if this was an exposed function it could stay here because
-        //eg the above could not "change" independetly of this
+
         //what if we decide we need this func? static utility class?
         private static int ToDays(IDate date)
         {
@@ -107,7 +106,7 @@ namespace DateDiffMVC.Services
 
 
         //below could be considered props of dates no?
-        //but they are required here so...
+        // can we use instance of this in date to get props?
         private static int LeapYear(int year)
         {
             return year%4 == 0 ? 0 : year%100 == 0 ? 1 : 0;
@@ -129,6 +128,5 @@ namespace DateDiffMVC.Services
             { 12, 31}
 
         };
-
     }
 }

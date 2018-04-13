@@ -14,7 +14,7 @@ namespace DateDiffMVC.ViewModels
 
     // [HomeViewValidation] 
     //REPLACE WITH OBJECT VALIDATION? 
- //   [MetadataType(typeof(Metadata))]
+    [MetadataType(typeof(Metadata))]
     public class HomeViewModel  : IValidatableObject
     {
 
@@ -22,6 +22,10 @@ namespace DateDiffMVC.ViewModels
         public Date EndDate { get; set; }
 
         public Tuple<int,int,int> Result { get; set; }
+
+        [Remote("VerifyTest", "Home", ErrorMessage = "TEST")]
+        public string Test { get; set; }
+
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -48,9 +52,4 @@ namespace DateDiffMVC.ViewModels
         }
     }
 
-    //public class Metadata
-    //{
-    //    [Remote("VerifyDay", "Home", ErrorMessage = "TEST")]
-    //    public Date StartDate { get; set; }
-    //}
 }

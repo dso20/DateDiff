@@ -5,24 +5,30 @@ namespace DateDiffMVC.Controllers
 {
     public class LoggerService : ILoggerService
     {
+       
         public void Log(string message, object source)
         {
             Console.WriteLine(message + " " + source.GetType());
         }
     }
 
-
-    //so if i do this, first how do I get an instance of the LoggerService?
-    //does this replace it's predecessor in startup?
-    public class NewLoggerService : ILoggerService
+    //so below can now stand in for above where it's used, but at the same time has provided a newfunction for whatever needs it
+    //autofac can account for decorators, so the correct object is passed to the controller
+    public class DecoratorLoggerService : ILoggerService
     {
-        
-        public void Log(string message, object source)
+        private readonly ILoggerService _logger;
+
+        public DecoratorLoggerService(ILoggerService logger)
         {
-            throw new NotImplementedException();
+            _logger = logger;
         }
 
-        public void newfunction(string test)
+        public void Log(string message, object source)
+        {
+            _logger.Log(message,source);
+        }
+
+        public void Newfunction(string test)
         {
 
         }

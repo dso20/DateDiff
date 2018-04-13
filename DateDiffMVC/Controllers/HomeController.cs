@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Web;
 using System.Web.Mvc;
@@ -37,9 +38,9 @@ namespace DateDiffMVC.Controllers
 
 
             var result = _calendarService.Result(model.StartDate, model.EndDate);
+            //below should go in the calendar service?
             _logger.Log($"The difference between these dates is {result.Item3} years {result.Item2} Months and {result.Item1} days.", this.GetType());
-            //the above should be done in another class really?
-
+            
             var viewModel = new HomeViewModel() {Result = result };
 
             return View(viewModel);
@@ -47,9 +48,8 @@ namespace DateDiffMVC.Controllers
         }
 
       //  [AcceptVerbs("Get", "Post")]
-        public JsonResult VerifyDay(int Day)
+        public JsonResult VerifyTest(string Test)
         {
-
             return Json(false, JsonRequestBehavior.AllowGet);
         }
     }
