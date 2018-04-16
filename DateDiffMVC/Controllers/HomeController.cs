@@ -36,9 +36,7 @@ namespace DateDiffMVC.Controllers
             if (!ModelState.IsValid)
                 return View(new HomeViewModel());
 
-
             var result = _calendarService.Result(model.StartDate, model.EndDate);
-            //below should go in the calendar service?
             _logger.Log($"The difference between these dates is {result.Item3} years {result.Item2} Months and {result.Item1} days.", this.GetType());
             
             var viewModel = new HomeViewModel() {Result = result };

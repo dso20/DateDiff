@@ -7,15 +7,8 @@ using DateDiffMVC.Models;
 
 namespace DateDiffMVC.Services
 {
-    //The client should define the interface, therefore,
-    //expose function that returns the result
-    //also it takes 2 dates, which are the original parameters of the controllers viewmodel
-    //following that the variables that that func needs should be worked out in here too
-
-    //so this class looks a little large
-    //also what functions should we choose to expose?
-
-    //extension? should the main method be virtual? should the interface inherit from a base interface so we could allow for different parameters to be passed?
+    // only real question is should I be exposing more functions than this. The Leap year, 
+    //numbers of days in a date and number of days in a month all could be sueful in a hypothetical project
     public class CalendarService : ICalendarService
     {
 
