@@ -17,7 +17,7 @@ namespace DateDiffMVC.Interfaces
 
         public void Log(string message, object source)
         {
-           _baselog.Log(message,source);
+           //_baselog.Log(message,source);
             var test = "test";
         }
 
