@@ -27,16 +27,16 @@ namespace DateDiffMVC.Services
         public static int ToDays(IDate date)
         {
             var days = date.Day;
-            var months = MonthDays(date.Month, date.Year);
-            var years = YearDays(date.Year);
+            days += MonthYearToDays(date.Month, date.Year);
 
-            return days += months += years;
+            return days;
         }
 
 
-        private static int MonthDays(int month, int year)
+        private static int MonthYearToDays(int month, int year)
         {
             //want only full months, if jan then no full month to count
+            int yearZero = 1582;
             month -= 1;
 
             var days = 0;
@@ -48,15 +48,7 @@ namespace DateDiffMVC.Services
             //factor in leap year
             days += month >= 2 ? LeapYear(year) : 0;
 
-            return days;
-        }
-
-        private static int YearDays(int year, int yearZero = 1582)
-        {
-            //want a full year
             year -= 1;
-
-            var days = 0;
             for (int i = yearZero; i <= year; i++)
             {
                 days += 365 + LeapYear(i);
@@ -72,10 +64,8 @@ namespace DateDiffMVC.Services
             //so we could assume the number of days in a year and dateStart subtracting 365.24
             var years = (int)Math.Floor(diff / 365.24);
 
-            if (years > 0)
-            { diff -= (years * 365.24); }
+            diff -= years > 0 ? (years * 365.24) : 0;
 
-            //now need to do the same with months 30.437
             var months = 0;
             int days = 0;
 
@@ -90,8 +80,6 @@ namespace DateDiffMVC.Services
 
             days = (int)Math.Ceiling(diff);
 
-
-            //so we can test need a quantifiable val here
             return Tuple.Create(days, months, years);
         }
 
