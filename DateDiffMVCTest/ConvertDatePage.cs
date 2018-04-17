@@ -52,6 +52,12 @@ namespace DateDiffMVCTest
             return _driver.FindElement(By.Id("result")).Text;
         }
 
+        public string ErrorMessage()
+        {
+            return _driver.FindElement(By.CssSelector(".validation-summary-errors.text-danger ul li")).Text;
+
+        }
+
 
 
     }

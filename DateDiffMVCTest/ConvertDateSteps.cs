@@ -44,6 +44,14 @@ namespace DateDiffMVCTest
 
         }
 
+        [Then(@"I get error message back (.*)")]
+        public void ThenIGetErrorMessageBack(string expected)
+        {
+            var result = _converDatePage.ErrorMessage();
+            Assert.That(expected,Is.EqualTo(result));
+        }
+
+
         [AfterScenario]
         public void TearDown()
         {

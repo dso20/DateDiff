@@ -13,7 +13,7 @@ namespace DateDiffMVC.ViewModels
 {
 
     // [HomeViewValidation] 
-    //REPLACE WITH OBJECT VALIDATION? 
+    //REPLACEd WITH OBJECT VALIDATION
     [MetadataType(typeof(Metadata))]
     public class HomeViewModel  : IValidatableObject
     {

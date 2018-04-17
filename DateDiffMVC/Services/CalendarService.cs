@@ -24,8 +24,7 @@ namespace DateDiffMVC.Services
         }
 
 
-        //what if we decide we need this func? static utility class?
-        private static int ToDays(IDate date)
+        public static int ToDays(IDate date)
         {
             var days = date.Day;
             var months = MonthDays(date.Month, date.Year);
@@ -95,7 +94,6 @@ namespace DateDiffMVC.Services
             //so we can test need a quantifiable val here
             return Tuple.Create(days, months, years);
         }
-
 
 
         //below could be considered props of dates no?

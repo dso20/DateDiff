@@ -85,6 +85,27 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I enter invalid dates")]
+        [NUnit.Framework.TestCaseAttribute("1", "4", "2020", "5", "7", "2010", "Start year is in the past", null)]
+        [NUnit.Framework.TestCaseAttribute("1", "7", "2100", "4", "4", "2100", "Start date is in the past", null)]
+        public virtual void IEnterInvalidDates(string startday, string startmonth, string startyear, string endday, string endmonth, string endyear, string error, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I enter invalid dates", exampleTags);
+#line 15
+this.ScenarioSetup(scenarioInfo);
+#line 16
+  testRunner.Given(string.Format("I enter a valid start date of {0}/{1}/{2}", startday, startmonth, startyear), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 17
+   testRunner.And(string.Format("I enter a vaild end date of {0}/{1}/{2}", endday, endmonth, endyear), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+   testRunner.When("I submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 19
+  testRunner.Then(string.Format("I get error message back {0}", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
