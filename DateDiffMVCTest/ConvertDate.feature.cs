@@ -81,7 +81,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 6
    testRunner.When("I submit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 7
-   testRunner.Then(string.Format("I get back the difference betweent he dates {0}", diff), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+   testRunner.Then(string.Format("I get back the difference between the dates {0}", diff), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

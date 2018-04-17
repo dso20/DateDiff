@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using DateDiffMVC.Models;
 
 namespace DateDiffMVC.Services
 {
-    // only real question is should I be exposing more functions than this. The Leap year, 
-    //numbers of days in a date and number of days in a month all could be sueful in a hypothetical project
     public class CalendarService : ICalendarService
     {
 
@@ -23,7 +18,7 @@ namespace DateDiffMVC.Services
             return Diff(timespan.Days, start);
         }
 
-
+        //helper class, bad to expose? could see it being useful
         public static int ToDays(IDate date)
         {
             var days = date.Day;
@@ -67,7 +62,6 @@ namespace DateDiffMVC.Services
             diff -= years > 0 ? (years * 365.24) : 0;
 
             var months = 0;
-            int days = 0;
 
             //count month if days remaining are more than in a month
             while (diff >= Months[dateStart.Month])
@@ -78,7 +72,7 @@ namespace DateDiffMVC.Services
                 dateStart.Month = dateStart.Month == 13 ? 1 : dateStart.Month;
             }
 
-            days = (int)Math.Ceiling(diff);
+            var days = (int)Math.Ceiling(diff);
 
             return Tuple.Create(days, months, years);
         }

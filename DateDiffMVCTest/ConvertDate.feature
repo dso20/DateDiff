@@ -4,7 +4,7 @@ Scenario Outline: I enter valid dates to convert
 			Given I enter a valid start date of <startday>/<startmonth>/<startyear>
 			And I enter a vaild end date of <endday>/<endmonth>/<endyear>
 			When I submit
-			Then I get back the difference betweent he dates <diff>
+			Then I get back the difference between the dates <diff>
 			Examples:
 			| startday | startmonth | startyear | endday | endmonth | endyear | diff    |
 			| 1        | 4          | 1999      | 5      | 7        | 2010    | There are 11 Years 3 Months and 2 Days between these dates. |

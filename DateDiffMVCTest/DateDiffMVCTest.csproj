@@ -101,6 +101,7 @@
     <Compile Include="ConvertDatePage.cs" />
     <Compile Include="ConvertDateSteps.cs" />
     <Compile Include="HomeTests.cs" />
+    <Compile Include="Hooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

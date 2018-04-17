@@ -17,6 +17,11 @@ namespace DateDiffMVCTest
         public ConvertDatePage(IWebDriver driver)
         {
             _driver = driver;
+            PageFactory.InitElements(_driver, this);
+        }
+
+        public ConvertDatePage()
+        {
             _driver.Navigate().GoToUrl(PageUri);
 
           //  PageFactory.InitElements(_driver,this);
