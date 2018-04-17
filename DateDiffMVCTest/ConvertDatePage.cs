@@ -12,12 +12,10 @@ namespace DateDiffMVCTest
     class ConvertDatePage
     {
         private IWebDriver _driver;
-        private const string PageUri = @"http://localhost:9237/Home/Index";
 
         public ConvertDatePage(IWebDriver driver)
         {
             _driver = driver;
-            _driver.Navigate().GoToUrl(PageUri);
 
           //  PageFactory.InitElements(_driver,this);
         }

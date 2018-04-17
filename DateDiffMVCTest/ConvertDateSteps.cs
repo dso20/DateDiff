@@ -12,12 +12,14 @@ namespace DateDiffMVCTest
         private IWebDriver _driver;
         private ConvertDatePage _converDatePage;
 
+        public ConvertDateSteps(IWebDriver driver)
+        {
+            _driver = driver;
+        }
+
         [Given(@"I enter a valid start date of (.*)/(.*)/(.*)")]
         public void GivenIEnterAValidStartDateOf(string p0, string p1, string p2)
         {
-            _driver = new ChromeDriver(@"C:\Users\dowen\AppData\Local\Google\Chrome\Application\");
-            _driver.Manage().Window.Maximize();
-
             _converDatePage = new ConvertDatePage(_driver);
             _converDatePage.EnterValidStart( p0, p1, p2);
 
