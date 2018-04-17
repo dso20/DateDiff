@@ -105,7 +105,7 @@ namespace DateDiffMVC.Services
             return year%4 == 0 ? 0 : year%100 == 0 ? 1 : 0;
         }
 
-        private readonly static Dictionary<int, int> Months = new Dictionary<int, int>()
+        private static readonly Dictionary<int, int> Months = new Dictionary<int, int>()
         {
             { 1, 31},
             { 2, 28},

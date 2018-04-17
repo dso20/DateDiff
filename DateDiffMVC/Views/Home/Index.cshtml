@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.StartDate.Day, new { htmlAttributes = new { @class = "control-label" } })
                                     <div class="well well-sm">
-                                        @Html.DropDownListFor(m => m.StartDate.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Day", new { htmlAttributes = new { @class = "form-control" }, id = 1 })
+                                        @Html.DropDownListFor(m => m.StartDate.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Day", new { htmlAttributes = new { @class = "form-control" }})
                                     </div>
                                     @*<span asp-validation-for="1" class="text-danger"></span>*@
                                 </div>
@@ -94,7 +94,7 @@
                 @if (Model.Result != null)
                 {
                     @Html.LabelFor(m => m.Result, new { htmlAttributes = new { @class = "control-label" } })
-                    <h3>
+                    <h3 id="result">
                         @($"There are {@Model.Result.Item3} Years {@Model.Result.Item2} Months and {@Model.Result.Item1} Days between these dates.")
                     </h3>
                 }
