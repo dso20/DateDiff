@@ -14,6 +14,7 @@ namespace DateDiffMVC.Controllers
         public void Log(string message, object source)
         {
             _logger.Log(message,source);
+            // or can ad extra logic here
         }
 
         public void Newfunction(string test)
