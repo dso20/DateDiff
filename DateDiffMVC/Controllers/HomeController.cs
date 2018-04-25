@@ -8,7 +8,23 @@ using System.Web.Mvc;
 using DateDiffMVC.Models;
 using DateDiffMVC.Services;
 using DateDiffMVC.ViewModels;
+#region Notes
 
+//Tech/approches used in project
+//Service layer
+//Decorator pattern (see logging)
+//Automation testing, using hooks
+//Unit testing
+//dependency injection using AutoFac, see global
+//"decorator injection" as above
+//SOLID principles
+//custom validation
+//object validation
+//ajax valid dation using metadata (failing)
+//razor inline helper, see index view
+//to debud publish site to local iis, create website folder for it to run from, then push changes from here to that folder. You "attach" this to the process of the site running to debug, allowing to have the site constantly running
+//to attach to prcoess W3W (iis one for each site). to get a list for the id, CMD as admin. cd inetsrv. appcmd list wp
+#endregion
 namespace DateDiffMVC.Controllers
 {
     public class HomeController : Controller

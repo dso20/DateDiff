@@ -21,6 +21,8 @@ namespace DateDiffMVC.ViewModels
         public Date StartDate { get; set; }
         public Date EndDate { get; set; }
 
+        public string test { get; set; }
+
         public Tuple<int,int,int> Result { get; set; }
 
         [Remote("VerifyTest", "Home", ErrorMessage = "TEST")]

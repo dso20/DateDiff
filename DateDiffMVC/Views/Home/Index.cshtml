@@ -1,4 +1,6 @@
-﻿@using System.Web.Optimization
+﻿@using System.Linq.Expressions
+@using System.Web.Optimization
+@using DateDiffMVC.ViewModels
 @model DateDiffMVC.ViewModels.HomeViewModel
 @{
     Layout = null;
@@ -12,6 +14,17 @@
     @Scripts.Render("~/bundles/jqueryunobtrusive")
     @Scripts.Render("~/bundles/jqueryval")
     
+    @helper RenderForm(string field)
+    {
+        
+        <div class="form-group">
+            @Html.TextBoxFor(f => field, new { htmlAttributes = new { @class = "control-label" } })
+            <div class="well well-sm">
+                @Html.DropDownListFor(f =>field, Enumerable.Range(1, 31).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Day", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    }
+
 
 </head>
 <body>
@@ -32,10 +45,12 @@
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.StartDate.Day, new { htmlAttributes = new { @class = "control-label" } })
                                     <div class="well well-sm">
-                                        @Html.DropDownListFor(m => m.StartDate.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Day", new { htmlAttributes = new { @class = "form-control" }})
+                                        @Html.DropDownListFor(m => m.StartDate.Day, Enumerable.Range(1, 31).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Day", new { htmlAttributes = new { @class = "form-control" } })
                                     </div>
                                     @*<span asp-validation-for="1" class="text-danger"></span>*@
                                 </div>
+                                <h1>@Model.test</h1>
+                                @RenderForm(Model.test)
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.StartDate.Month, new { htmlAttributes = new { @class = "control-label" } })
                                     <div class="well well-sm">
