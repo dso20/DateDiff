@@ -11,19 +11,24 @@
 <head>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryunobtrusive")
     @Scripts.Render("~/bundles/jqueryval")
-    
-    @helper RenderForm(string field)
-    {
-        
-        <div class="form-group">
-            @Html.TextBoxFor(f => field, new { htmlAttributes = new { @class = "control-label" } })
-            <div class="well well-sm">
-                @Html.DropDownListFor(f =>field, Enumerable.Range(1, 31).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Day", new { htmlAttributes = new { @class = "form-control" } })
+
+    @*<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>*@
+
+    <!--helper-->
+    @helper RenderForm(HomeViewModel model)
+        {
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.StartDate.Month, new { htmlAttributes = new { @class = "control-label" } })
+                <div class="well well-sm">
+                    @Html.DropDownListFor(m => m.StartDate.Month, Enumerable.Range(1, 12).Select(i => new SelectListItem { Value = i.ToString(), Text = i.ToString() }), "Month", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
             </div>
-        </div>
-    }
+}
 
 
 </head>
@@ -49,8 +54,10 @@
                                     </div>
                                     @*<span asp-validation-for="1" class="text-danger"></span>*@
                                 </div>
-                                <h1>@Model.test</h1>
-                                @RenderForm(Model.test)
+
+                                <!--helper method-->
+                                @*@RenderForm(Model)*@
+ 
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.StartDate.Month, new { htmlAttributes = new { @class = "control-label" } })
                                     <div class="well well-sm">

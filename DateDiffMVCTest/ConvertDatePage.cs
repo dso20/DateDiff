@@ -17,17 +17,31 @@ namespace DateDiffMVCTest
         {
             _driver = driver;
 
-          //  PageFactory.InitElements(_driver,this);
+            PageFactory.InitElements(_driver,this);
         }
+
+        //better way to init using Pagefactory then assinging elelmets to fields
+        // IWebElement _drop = _driver.FindElement(By.Id("StartDate_Day"));
+        [FindsBy(How = How.XPath, Using = "//*[contains(@id, 'StartDate_Day')]")]
+        private IWebElement _dropDownValue;
+
+        //can then just use get set
+        private string test
+        {
+            get => _dropDownValue.GetAttribute("value");
+            set => _dropDownValue.SendKeys(value);
+        }
+
 
         public void EnterValidStart(string day, string month, string year)
         {
-            IWebElement dropDownValue = _driver.FindElement(By.Id("StartDate_Day"));
-            dropDownValue.SendKeys(day);
-            dropDownValue = _driver.FindElement(By.Id("StartDate_Month"));
-            dropDownValue.SendKeys(month);
-            dropDownValue = _driver.FindElement(By.Id("StartDate_Year"));
-            dropDownValue.SendKeys(year);
+            //better way to init using Pagefactory then assinging elelmets to fields
+            // IWebElement _drop = _driver.FindElement(By.Id("StartDate_Day"));
+            _dropDownValue.SendKeys(day);
+            _dropDownValue = _driver.FindElement(By.Id("StartDate_Month"));
+            _dropDownValue.SendKeys(month);
+            _dropDownValue = _driver.FindElement(By.Id("StartDate_Year"));
+            _dropDownValue.SendKeys(year);
         }
 
         public void EnterValidEnd(string day, string month, string year)

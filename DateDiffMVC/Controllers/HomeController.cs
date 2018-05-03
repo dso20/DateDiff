@@ -20,7 +20,7 @@ using DateDiffMVC.ViewModels;
 //SOLID principles
 //custom validation
 //object validation
-//ajax valid dation using metadata (failing)
+//ajax validation using metadata (failing)
 //razor inline helper, see index view
 //to debud publish site to local iis, create website folder for it to run from, then push changes from here to that folder. You "attach" this to the process of the site running to debug, allowing to have the site constantly running
 //to attach to prcoess W3W (iis one for each site). to get a list for the id, CMD as admin. cd inetsrv. appcmd list wp
@@ -61,7 +61,7 @@ namespace DateDiffMVC.Controllers
 
         }
 
-      //  [AcceptVerbs("Get", "Post")]
+        [AcceptVerbs("Get", "Post")]
         public JsonResult VerifyTest(string Test)
         {
             return Json(false, JsonRequestBehavior.AllowGet);
